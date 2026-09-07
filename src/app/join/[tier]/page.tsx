@@ -85,7 +85,7 @@ export default async function Join({ params, searchParams }: { params: Promise<{
       ) : (
         <form action={requestInvite} style={{ marginTop: 24 }} className="stack">
           <input type="hidden" name="tier" value={k} />
-          <div className="alert">Founding cohort: spots are confirmed by the coach. Request one below and you&apos;ll hear back within a day.</div>
+          <div className="alert">First camp: spots are confirmed by the coach. Request one below and you&apos;ll hear back within a day.</div>
           <div className="row c2">
             <div className="field"><label htmlFor="name">Your name (parent)</label><input id="name" name="name" required /></div>
             <div className="field"><label htmlFor="email">Email</label><input id="email" name="email" type="email" required /></div>
