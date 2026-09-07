@@ -48,7 +48,7 @@ export default async function Roster({ searchParams }: { searchParams: Promise<R
 
       <form action={addMember} className="card">
         <h4>Add an athlete by hand</h4>
-        <p className="small muted" style={{ margin: "6px 0 12px" }}>Founder cohort, comps, Venmo/Zelle payments. They get a welcome email with the sign-in link; they set up their own profile.</p>
+        <p className="small muted" style={{ margin: "6px 0 12px" }}>First camp, comps, Venmo/Zelle payments. They get a welcome email with the sign-in link; they set up their own profile.</p>
         <div className="row c4">
           <div className="field"><label htmlFor="email">Sign-in email</label><input id="email" name="email" type="email" required /></div>
           <div className="field"><label htmlFor="athleteName">Athlete name</label><input id="athleteName" name="athleteName" /></div>
