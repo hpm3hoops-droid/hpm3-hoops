@@ -22,14 +22,14 @@ export default async function Home() {
             <h1 style={{ marginTop: 14 }}>Make the team.<br />Then keep<br />the spot.</h1>
             <p className="lede">A daily plan that fits after school — 15 minutes to start, 60 by the time it counts — with a coach who checks your numbers every week and film study you actually do. No gym required.</p>
             <div className="cta">
-              <a className="btn" href="#pricing">Join the Tryout Prep cohort</a>
+              <a className="btn" href="#pricing">Join the Tryout Prep Camp</a>
               <a className="btn ghost" href="#program">See the plan</a>
             </div>
           </div>
           <aside className="key" aria-label="Countdown to tryouts">
             <p className="eyebrow label">Florida HS tryouts open</p>
             <Countdown target={TRYOUT_TS} />
-            <p className="small muted" style={{ marginTop: 12 }}>FHSAA first practice: <span className="mono">{TRYOUT_DATE_LABEL}</span>. Cohort 1 starts <span className="mono">{COHORT_START_LABEL}</span>.</p>
+            <p className="small muted" style={{ marginTop: 12 }}>FHSAA first practice: <span className="mono">{TRYOUT_DATE_LABEL}</span>. Camp starts <span className="mono">{COHORT_START_LABEL}</span>.</p>
           </aside>
         </div>
       </header>
@@ -119,7 +119,7 @@ export default async function Home() {
           <div className="stat"><div className="bignum">5+</div><span>college players developed</span></div>
           <div className="stat"><div className="bignum">NBA</div><span>professional clients</span></div>
         </div>
-        <p className="small muted" style={{ marginTop: 22, maxWidth: "40em", padding: 16, border: "1px dashed var(--line)" }}>Founding-cohort results (Day 1 vs. Day 49 benchmarks, and who made their team) will be posted here after Oct 26, 2026. Nothing on this page is a testimonial until it&apos;s real.</p>
+        <p className="small muted" style={{ marginTop: 22, maxWidth: "40em", padding: 16, border: "1px dashed var(--line)" }}>First-camp results (Day 1 vs. Day 49 benchmarks, and who made their team) will be posted here after Oct 26, 2026. Nothing on this page is a testimonial until it&apos;s real.</p>
       </section>
 
       <section className="band" id="faq">
@@ -130,15 +130,23 @@ export default async function Home() {
           <details><summary>How much of my time does this take?</summary><p>Almost none. You get a weekly progress email, and you&apos;re invited to the first and last call of each block.</p></details>
           <details><summary>Can they do this during the season?</summary><p>Yes — tell us practice days and the in-season track schedules short sessions around them. Film study switches to their own games.</p></details>
           <details><summary>What if they don&apos;t make the team?</summary><p>They roll into the Rebuild track on Core, with longer sessions since there&apos;s no practice load. Most cuts come down to one or two visible gaps; the benchmarks tell us which.</p></details>
-          <details><summary>Is there a refund?</summary><p>Cohort spots are non-refundable once the cohort starts. Monthly plans cancel any time before the next billing date.</p></details>
+          <details><summary>Is there a refund?</summary><p>Camp spots are non-refundable once camp starts. Monthly plans cancel any time before the next billing date.</p></details>
         </div>
       </section>
 
       <section className="final">
-        <p className="eyebrow">Cohort 1 · {COHORT_START_LABEL} → Oct 26 and beyond</p>
-        <h2 style={{ marginTop: 10 }}>Tryouts are in <Countdown target={TRYOUT_TS} daysOnly /> days either way.</h2>
-        <p>The only question is whether they walk in with seven weeks of numbers behind them or as the same player as last year.</p>
-        <a className="btn" href="#pricing" style={{ marginTop: 24 }}>Join the Tryout Prep cohort</a>
+        <div className="final-grid">
+          <div className="final-count">
+            <div className="final-num"><Countdown target={TRYOUT_TS} daysOnly /></div>
+            <div className="final-lbl">days until tryouts</div>
+          </div>
+          <div>
+            <p className="eyebrow">Camp runs {COHORT_START_LABEL} → Oct 26 and beyond</p>
+            <h2 style={{ marginTop: 10 }}>Walk in a different player.</h2>
+            <p>Tryouts happen either way. The only question is whether your kid walks in with seven weeks of numbers behind them — or as the same player as last year.</p>
+            <a className="btn" href="#pricing" style={{ marginTop: 24 }}>Join the Tryout Prep Camp</a>
+          </div>
+        </div>
       </section>
 
       <footer className="site">
