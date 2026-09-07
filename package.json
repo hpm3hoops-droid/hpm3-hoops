@@ -1,0 +1,35 @@
+{
+  "name": "hpm3-hoops",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "tsx scripts/migrate.ts && tsx scripts/seed.ts && next start -p ${PORT:-3000}",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "nudge": "tsx scripts/nudge.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "0.45.2",
+    "jose": "6.2.12",
+    "next": "15.5.25",
+    "nodemailer": "7.0.13",
+    "pg": "8.23.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "stripe": "22.6.1",
+    "tsx": "4.23.13",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "@types/nodemailer": "7.0.2",
+    "@types/pg": "8.23.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "drizzle-kit": "0.31.10",
+    "typescript": "5.8.3"
+  }
+}
