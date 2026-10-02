@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { requireAthlete } from "@/lib/auth";
 import NavLink from "@/components/NavLink";
+import { hasFullAccess } from "@/lib/config";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const { athlete, user } = await requireAthlete();
@@ -16,7 +17,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <NavLink href="/app/film">Film study</NavLink>
         <NavLink href="/app/calls">Calls</NavLink>
         <NavLink href="/app/progress">Progress</NavLink>
-        {athlete.tier === "ELITE" && <NavLink href="/app/clips">My clips</NavLink>}
+        {hasFullAccess(athlete.tier) && <NavLink href="/app/clips">My clips</NavLink>}
         <NavLink href="/onboarding">Profile</NavLink>
         <div className="spacer" />
         {isCoach && <NavLink href="/coach">Coach view</NavLink>}
