@@ -3,13 +3,14 @@ import { redirect } from "next/navigation";
 import { requireAthlete } from "@/lib/auth";
 import { db, clips } from "@/db";
 import { addClip } from "../actions";
+import { hasFullAccess } from "@/lib/config";
 
 export const metadata = { title: "My clips" };
 export const dynamic = "force-dynamic";
 
 export default async function Clips() {
   const { athlete: a } = await requireAthlete();
-  if (a.tier !== "ELITE") redirect("/app");
+  if (!hasFullAccess(a.tier)) redirect("/app");
   const rows = await db.select().from(clips).where(eq(clips.athleteId, a.id)).orderBy(desc(clips.createdAt));
   return (
     <div>
