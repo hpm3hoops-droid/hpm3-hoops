@@ -22,7 +22,7 @@ export default async function Settings({ searchParams }: { searchParams: Promise
         <table style={{ marginTop: 8 }}><tbody>
           <tr><td>Email (magic links, nudges)</td><td><span className={`pill ${smtp ? "green" : "red"}`}>{smtp ? "configured" : "not configured — links print to server logs"}</span></td></tr>
           <tr><td>Stripe checkout</td><td><span className={`pill ${stripeOn ? "green" : "yellow"}`}>{stripeOn ? "live" : "off — join page collects requests instead"}</span></td></tr>
-          {(["COHORT", "CORE", "ELITE"] as const).map((k) => <tr key={k}><td>Price ID · {TIERS[k].name}</td><td className="mono small">{process.env[TIERS[k].envKey] ? "set" : "missing"}</td></tr>)}
+          {(["CORE", "ELITE"] as const).map((k) => <tr key={k}><td>Price ID · {TIERS[k].name}</td><td className="mono small">{process.env[TIERS[k].envKey] ? "set" : "missing"}</td></tr>)}
           <tr><td>Coach emails</td><td className="mono small">{process.env.COACH_EMAILS || "(none — set COACH_EMAILS)"}</td></tr>
           <tr><td>Daily nudge cron</td><td className="small">GET <span className="mono">/api/cron/nudge?key=CRON_SECRET</span> once a day (Railway cron or any scheduler)</td></tr>
         </tbody></table>
