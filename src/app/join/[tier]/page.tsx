@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { TIERS, stripeConfigured } from "@/lib/config";
+import { TIERS, stripeConfigured, COACH_CALL_URL } from "@/lib/config";
 import { stripe } from "@/lib/stripe";
 import { db, leads } from "@/db";
 import { sendMail } from "@/lib/mail";
@@ -11,7 +11,10 @@ export const metadata = { title: "Join" };
 
 const tierKey = (s: string): Exclude<Tier, "NONE"> | null => {
   const k = s.toUpperCase();
-  return k === "COHORT" || k === "CORE" || k === "ELITE" ? k : null;
+  // Friendly URLs for the two programs; the old camp is no longer sold.
+  if (k === "6-MONTH" || k === "CORE") return "CORE";
+  if (k === "12-MONTH" || k === "ELITE") return "ELITE";
+  return null;
 };
 
 async function checkout(formData: FormData) {
@@ -39,7 +42,7 @@ async function checkout(formData: FormData) {
 
 async function requestInvite(formData: FormData) {
   "use server";
-  const k = tierKey(String(formData.get("tier") || "")) ?? "COHORT";
+  const k = tierKey(String(formData.get("tier") || "")) ?? "CORE";
   const email = String(formData.get("email") || "").trim().toLowerCase();
   const name = String(formData.get("name") || "").trim();
   const athleteName = String(formData.get("athleteName") || "").trim();
@@ -57,6 +60,7 @@ async function requestInvite(formData: FormData) {
 export default async function Join({ params, searchParams }: { params: Promise<{ tier: string }>; searchParams: Promise<Record<string, string | undefined>> }) {
   const { tier } = await params;
   const sp = await searchParams;
+  if (tier.toLowerCase() === "cohort") redirect("/#pricing");
   const k = tierKey(tier);
   if (!k) notFound();
   const t = TIERS[k];
@@ -81,11 +85,12 @@ export default async function Join({ params, searchParams }: { params: Promise<{
           <div className="field"><label htmlFor="athleteName">Athlete&apos;s name</label><input id="athleteName" name="athleteName" required /></div>
           <button className="btn" type="submit">Continue to secure checkout</button>
           <p className="small muted">Card is charged by Stripe. You&apos;ll get a sign-in link by email right after.</p>
+          <p className="small muted">Not sure yet? <a href={COACH_CALL_URL} target="_blank" rel="noreferrer">Talk to a coach first</a>.</p>
         </form>
       ) : (
         <form action={requestInvite} style={{ marginTop: 24 }} className="stack">
           <input type="hidden" name="tier" value={k} />
-          <div className="alert">First camp: spots are confirmed by the coach. Request one below and you&apos;ll hear back within a day.</div>
+          <div className="alert">Spots are confirmed by the coach. Request one below and you&apos;ll hear back within a day.</div>
           <div className="row c2">
             <div className="field"><label htmlFor="name">Your name (parent)</label><input id="name" name="name" required /></div>
             <div className="field"><label htmlFor="email">Email</label><input id="email" name="email" type="email" required /></div>
@@ -96,6 +101,7 @@ export default async function Join({ params, searchParams }: { params: Promise<{
           </div>
           <div className="field"><label htmlFor="message">Anything we should know? (team, position, tryout date)</label><textarea id="message" name="message" /></div>
           <button className="btn" type="submit">Request a spot</button>
+          <p className="small muted">Or <a href={COACH_CALL_URL} target="_blank" rel="noreferrer">talk to a coach first</a>.</p>
         </form>
       )}
     </div>
