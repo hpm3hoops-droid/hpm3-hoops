@@ -1,9 +1,6 @@
 import Link from "next/link";
-import Countdown from "@/components/Countdown";
-import { TIERS, TRYOUT_DATE_LABEL, COHORT_START_LABEL } from "@/lib/config";
+import { TIERS } from "@/lib/config";
 import { currentUser } from "@/lib/auth";
-
-const TRYOUT_TS = "2026-10-26T06:00:00-04:00";
 
 export default async function Home() {
   const user = await currentUser();
@@ -26,10 +23,10 @@ export default async function Home() {
               <a className="btn ghost" href="#program">See the plan</a>
             </div>
           </div>
-          <aside className="key" aria-label="Countdown to tryouts">
-            <p className="eyebrow label">Florida HS tryouts open</p>
-            <Countdown target={TRYOUT_TS} />
-            <p className="small muted" style={{ marginTop: 12 }}>FHSAA first practice: <span className="mono">{TRYOUT_DATE_LABEL}</span>. Camp starts <span className="mono">{COHORT_START_LABEL}</span>.</p>
+          <aside className="key" aria-label="Enrollment">
+            <p className="eyebrow label">Now enrolling</p>
+            <h2 style={{ marginTop: 10 }}>Rolling admission</h2>
+            <p className="small muted" style={{ marginTop: 12 }}>Start any week.</p>
           </aside>
         </div>
       </header>
@@ -47,7 +44,7 @@ export default async function Home() {
             <p className="eyebrow">Three seasons, one system</p>
             <h2 style={{ marginTop: 10 }}>Wherever tryouts leave you</h2>
             <div className="stack" style={{ marginTop: 16 }}>
-              <div className="card"><h3>Tryout Prep</h3><p className="small muted" style={{ marginTop: 6 }}>Seven weeks. 15 → 60 minutes a day, 4–6 days a week. Benchmarks every Saturday so you walk in with numbers.</p></div>
+              <div className="card"><h3>Tryout Prep</h3><p className="small muted" style={{ marginTop: 6 }}>15 → 60 minutes a day, 4–6 days a week. Benchmarks every Saturday so you walk in with numbers.</p></div>
               <div className="card"><h3>Made the team</h3><p className="small muted" style={{ marginTop: 6 }}>Practice is the team&apos;s work; this is yours. Short sessions on practice days, real work on off days. Film study switches to your own games. Next goal: minutes, then a scholarship.</p></div>
               <div className="card"><h3>Didn&apos;t make it</h3><p className="small muted" style={{ marginTop: 6 }}>Not fun. But no practice load means more gym time and faster level-ups — and there are more routes in basketball now than ever. The Rebuild starts the Monday after cuts.</p></div>
             </div>
@@ -137,13 +134,12 @@ export default async function Home() {
       <section className="final">
         <div className="final-grid">
           <div className="final-count">
-            <div className="final-num"><Countdown target={TRYOUT_TS} daysOnly /></div>
-            <div className="final-lbl">days until tryouts</div>
+            <div className="final-lbl">Now enrolling — rolling admission</div>
           </div>
           <div>
-            <p className="eyebrow">Camp runs {COHORT_START_LABEL} → Oct 26 and beyond</p>
+            <p className="eyebrow">Now enrolling — rolling admission</p>
             <h2 style={{ marginTop: 10 }}>Walk in a different player.</h2>
-            <p>Tryouts happen either way. The only question is whether your kid walks in with seven weeks of numbers behind them — or as the same player as last year.</p>
+            <p>Tryouts happen either way. The only question is whether your kid walks in with real numbers behind them — or as the same player as last year.</p>
             <a className="btn" href="#pricing" style={{ marginTop: 24 }}>Join the Tryout Prep Camp</a>
           </div>
         </div>
