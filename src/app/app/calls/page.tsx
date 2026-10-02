@@ -2,6 +2,7 @@ import { and, eq, or } from "drizzle-orm";
 import { requireAthlete } from "@/lib/auth";
 import { db, groupCalls, settings } from "@/db";
 import { TRACK_LABEL } from "@/lib/program";
+import { hasFullAccess } from "@/lib/config";
 
 export const metadata = { title: "Calls" };
 export const dynamic = "force-dynamic";
@@ -37,7 +38,7 @@ export default async function Calls() {
           <p className="small muted" style={{ marginTop: 10 }}>Parents: join the first and last call of each block. Otherwise it&apos;s the athletes&apos; room.</p>
         </div>
 
-        {a.tier === "ELITE" && (
+        {hasFullAccess(a.tier) && (
           <div className="card hot">
             <h3>Your weekly 1:1</h3>
             <p className="small muted" style={{ marginTop: 8 }}>20 minutes, on video. Book the same slot each week if you can.</p>
