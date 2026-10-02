@@ -10,9 +10,9 @@ export const TIERS: Record<Exclude<Tier, "NONE">, {
   name: string; price: string; cadence: string; blurb: string; bullets: string[]; who: string; mode: "payment" | "subscription"; envKey: string;
 }> = {
   COHORT: {
-    name: "Tryout Prep Camp", price: "$297", cadence: "one-time · 7 weeks",
-    blurb: `Starts ${COHORT_START_LABEL} · 25 spots`,
-    bullets: ["Full 7-week plan, 15 → 60 min ramp", "Saturday benchmarks + coach dashboard", "Weekly group call with your camp", "Weekly film study hour", "\"What coaches look for\" tryout checklist, weeks 6–7"],
+    name: "Tryout Prep Camp", price: "$297", cadence: "one-time",
+    blurb: "Now enrolling · rolling admission",
+    bullets: ["Full plan, 15 → 60 min ramp", "Saturday benchmarks + coach dashboard", "Weekly group call with your camp", "Weekly film study hour", "\"What coaches look for\" tryout checklist, weeks 6–7"],
     who: "For anyone trying out Oct 26 — middle or high school.", mode: "payment", envKey: "STRIPE_PRICE_COHORT",
   },
   CORE: {
