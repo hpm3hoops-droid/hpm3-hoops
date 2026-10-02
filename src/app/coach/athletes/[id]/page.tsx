@@ -5,6 +5,7 @@ import { db, athletes, users, sessions, benchmarks, coachNotes, filmResponses, f
 import { compliance, programWeek, TRACK_LABEL, addDays, toISODate } from "@/lib/program";
 import { addNote, updateAthlete, endMembership, feedbackClip, replyFilm } from "../../actions";
 import Sparkline from "@/components/Sparkline";
+import { hasFullAccess } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
 
@@ -96,7 +97,7 @@ export default async function AthletePage({ params, searchParams }: { params: Pr
         </div>
       </div>
 
-      {(a.tier === "ELITE" || myClips.length > 0) && (
+      {(hasFullAccess(a.tier) || myClips.length > 0) && (
         <div className="card" style={{ marginTop: 16 }}>
           <h4>Clips</h4>
           <div className="stack" style={{ marginTop: 8 }}>
