@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TIERS } from "@/lib/config";
+import { TIERS, PROGRAMS, COACH_CALL_URL, contactEmail } from "@/lib/config";
 import { currentUser } from "@/lib/auth";
 
 export default async function Home() {
@@ -19,8 +19,8 @@ export default async function Home() {
             <h1 style={{ marginTop: 14 }}>Make the team.<br />Then keep<br />the spot.</h1>
             <p className="lede">A daily plan that fits after school — 15 minutes to start, 60 by the time it counts — with a coach who checks your numbers every week and film study you actually do. No gym required.</p>
             <div className="cta">
-              <a className="btn" href="#pricing">Join the Tryout Prep Camp</a>
-              <a className="btn ghost" href="#program">See the plan</a>
+              <a className="btn" href="#pricing">See the programs</a>
+              <a className="btn ghost" href={COACH_CALL_URL} target="_blank" rel="noreferrer">Talk to a coach first</a>
             </div>
           </div>
           <aside className="key" aria-label="Enrollment">
@@ -55,7 +55,7 @@ export default async function Home() {
           <div><span className="eyebrow">Every day</span><h3 style={{ marginTop: 8 }}>The plan</h3><p>Five blocks, six skill levels each. You move up when the numbers say so, not the calendar. Hoop and no-hoop version of every session.</p></div>
           <div><span className="eyebrow">Every Saturday</span><h3 style={{ marginTop: 8 }}>The numbers</h3><p>Six two-minute benchmarks, logged with a phone timer. Coach sees red / yellow / green. Miss two days and you get a text.</p></div>
           <div><span className="eyebrow">Every Wednesday</span><h3 style={{ marginTop: 8 }}>Film study</h3><p>One hour a week: curated clips on the week&apos;s skill with coach breakdown, then five questions about your own game.</p></div>
-          <div><span className="eyebrow">Every week</span><h3 style={{ marginTop: 8 }}>The call</h3><p>Group call for your track, same agenda every time: numbers, one clip, next week, your schedule. Elite adds a weekly 1:1.</p></div>
+          <div><span className="eyebrow">Every week</span><h3 style={{ marginTop: 8 }}>The call</h3><p>Group call for your track, same agenda every time: numbers, one clip, next week, your schedule. Plus a weekly 1:1 with your coach.</p></div>
         </div>
       </section>
 
@@ -80,22 +80,22 @@ export default async function Home() {
 
       <section className="band" id="pricing">
         <p className="eyebrow">Pricing</p>
-        <h2 style={{ marginTop: 10 }}>Pick your season</h2>
+        <h2 style={{ marginTop: 10 }}>One program. Two lengths.</h2>
         <div className="tiers">
-          {(["COHORT", "CORE", "ELITE"] as const).map((k) => {
+          {PROGRAMS.map((k) => {
             const t = TIERS[k];
             return (
-              <div className={`tier ${k === "COHORT" ? "hot" : ""}`} key={k}>
+              <div className={`tier ${k === "ELITE" ? "hot" : ""}`} key={k}>
                 <div><p className="eyebrow">{t.blurb}</p><h3 style={{ marginTop: 8 }}>{t.name}</h3></div>
                 <div className="price">{t.price} <small>{t.cadence}</small></div>
                 <ul>{t.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
                 <p className="small muted">{t.who}</p>
-                <Link className={`btn ${k === "COHORT" ? "" : "ghost"}`} href={`/join/${k.toLowerCase()}`}>{k === "COHORT" ? "Claim a spot" : k === "CORE" ? "Join Core" : "Apply for Elite"}</Link>
+                <Link className={`btn ${k === "ELITE" ? "" : "ghost"}`} href={`/join/${k === "CORE" ? "6-month" : "12-month"}`}>{k === "CORE" ? "Start the 6-month program" : "Start the 12-month program"}</Link>
               </div>
             );
           })}
         </div>
-        <p className="small muted" style={{ marginTop: 18 }}>Compare: one private session with an NBA-level trainer runs $200–500. A month of Core is two sessions&apos; worth — and it&apos;s every day.</p>
+        <p className="small muted" style={{ marginTop: 18 }}>Now enrolling — rolling admission. Start any week. Not sure which length fits? <a href={COACH_CALL_URL} target="_blank" rel="noreferrer">Talk to a coach first</a>.</p>
       </section>
 
       <section className="band" id="mmm">
@@ -116,7 +116,7 @@ export default async function Home() {
           <div className="stat"><div className="bignum">5+</div><span>college players developed</span></div>
           <div className="stat"><div className="bignum">NBA</div><span>professional clients</span></div>
         </div>
-        <p className="small muted" style={{ marginTop: 22, maxWidth: "40em", padding: 16, border: "1px dashed var(--line)" }}>First-camp results (Day 1 vs. Day 49 benchmarks, and who made their team) will be posted here after Oct 26, 2026. Nothing on this page is a testimonial until it&apos;s real.</p>
+        <p className="small muted" style={{ marginTop: 22, maxWidth: "40em", padding: 16, border: "1px dashed var(--line)" }}>First athlete results (Day 1 benchmarks vs. later ones, and who made their team) will be posted here as they come in. Nothing on this page is a testimonial until it&apos;s real.</p>
       </section>
 
       <section className="band" id="faq">
@@ -126,8 +126,8 @@ export default async function Home() {
           <details><summary>What equipment does my kid need?</summary><p>A ball, a phone with a timer, and one resistance band. A hoop helps but every session has a no-hoop version. Two-ball drills need a second ball.</p></details>
           <details><summary>How much of my time does this take?</summary><p>Almost none. You get a weekly progress email, and you&apos;re invited to the first and last call of each block.</p></details>
           <details><summary>Can they do this during the season?</summary><p>Yes — tell us practice days and the in-season track schedules short sessions around them. Film study switches to their own games.</p></details>
-          <details><summary>What if they don&apos;t make the team?</summary><p>They roll into the Rebuild track on Core, with longer sessions since there&apos;s no practice load. Most cuts come down to one or two visible gaps; the benchmarks tell us which.</p></details>
-          <details><summary>Is there a refund?</summary><p>Camp spots are non-refundable once camp starts. Monthly plans cancel any time before the next billing date.</p></details>
+          <details><summary>What if they don&apos;t make the team?</summary><p>They roll into the Rebuild track inside the same program, with longer sessions since there&apos;s no practice load. Most cuts come down to one or two visible gaps; the benchmarks tell us which.</p></details>
+          <details><summary>Can we talk to someone before we pay?</summary><p>Yes. <a href={COACH_CALL_URL} target="_blank" rel="noreferrer">Book a call with a coach</a> and ask anything, including how payment and refunds work, before you enroll.</p></details>
         </div>
       </section>
 
@@ -140,14 +140,19 @@ export default async function Home() {
             <p className="eyebrow">Now enrolling — rolling admission</p>
             <h2 style={{ marginTop: 10 }}>Walk in a different player.</h2>
             <p>Tryouts happen either way. The only question is whether your kid walks in with real numbers behind them — or as the same player as last year.</p>
-            <a className="btn" href="#pricing" style={{ marginTop: 24 }}>Join the Tryout Prep Camp</a>
+            <a className="btn" href="#pricing" style={{ marginTop: 24 }}>See the programs</a>
           </div>
         </div>
       </section>
 
       <footer className="site">
         <span>© 2026 HPM3 Hoops · Helping Players Master, Maximize, Multiply · an HPM3 LLC program</span>
-        <span><Link href="/login">Athlete sign-in</Link></span>
+        <span>
+          <a href={COACH_CALL_URL} target="_blank" rel="noreferrer">Talk to a coach first</a>
+          {" · "}<Link href="/privacy">Privacy</Link>
+          {contactEmail() ? <>{" · "}<a href={`mailto:${contactEmail()}`}>{contactEmail()}</a></> : null}
+          {" · "}<Link href="/login">Athlete sign-in</Link>
+        </span>
       </footer>
     </div>
   );
